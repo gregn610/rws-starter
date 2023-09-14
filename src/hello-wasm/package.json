@@ -13,5 +13,6 @@
   "types": "hello_wasm.d.ts",
   "sideEffects": [
     "./snippets/*"
-  ]
+  ],
+  "type": "module"
 }

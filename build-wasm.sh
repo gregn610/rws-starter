@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "Changing directory to hello-wasm"
 cd hello-wasm
 
@@ -13,18 +14,22 @@ cp -r pkg/* ../src/hello-wasm
 echo "Changing directory back to main directory"
 cd ..
 
+echo "Fix https://github.com/rustwasm/wasm-pack/issues/1039"
+jq '.type = "module"' ./src/hello-wasm/package.json > ./src/hello-wasm/package.json.tmp && \
+  mv ./src/hello-wasm/package.json.tmp ./src/hello-wasm/package.json
+
 echo "Installing dependencies"
-npm i
+bun install
 
 echo "Building Svelte app"
-npm run build
+bun run build
 
 while getopts ":p" opt; do
   case $opt in
     p)
       echo "-p was triggered!" >&2
       echo "Previewing svelte"
-      npm run preview
+      bun run preview
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
