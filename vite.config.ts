@@ -5,7 +5,11 @@ import wasm from 'vite-plugin-wasm';
 import topLevelAwait from 'vite-plugin-top-level-await';
 
 export default defineConfig({
-	plugins: [sveltekit(), wasm(), topLevelAwait()],
+	plugins: [
+		topLevelAwait(),
+		sveltekit(),
+		wasm()
+	],
 	server: {
 		fs: {
 			// You should be able to work with any files that are
